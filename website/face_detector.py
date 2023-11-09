@@ -1,4 +1,5 @@
 import streamlit as st
+import face_analyse
 
 import os
 import tempfile
@@ -7,8 +8,6 @@ import matplotlib.pyplot as plt
 import requests
 from PIL import Image
 from io import BytesIO
-
-from deep_face  import analyze_image, emotion_translator, emotion_to_emoji
 
 def detector():
     
@@ -23,7 +22,7 @@ def detector():
     )
     
     c1, c2, c3 = st.columns(3)
-    portada = "data/Detector_image_portada.jpeg"
+    portada = "lewagon_fer23/website/Detector_image_portada.jpeg"
     
     with c2:    
         st.image(portada, width=250)
@@ -53,11 +52,11 @@ def detector():
                     col1, col2 = st.columns(2)
                     
                     with col1:
-                        emotion, age, gender, race, analysis = analyze_image(temp_file_path)
+                        emotion, age, gender, race, analysis = face_analyse.analyze_image(temp_file_path)
                         
                     with col2:  
-                        spanish_emotion = emotion_translator(emotion)
-                        emoji =  emotion_to_emoji(emotion)
+                        spanish_emotion = face_analyse.emotion_translator(emotion)
+                        emoji =  face_analyse.emotion_to_emoji(emotion)
                         st.markdown(f"## Emocion Detectada: \n # {emoji} {spanish_emotion}")
                         # st.write(f"Predicted Age: {age}")
                         # st.write(f"Predicted Gender: {gender}")
@@ -66,7 +65,7 @@ def detector():
                     temp_dir.cleanup()      
                     # Add the PLOT
                     data = analysis[0]['emotion']
-                    spanish_emotion_names = [emotion_translator(emotion) for emotion in data.keys()]
+                    spanish_emotion_names = [face_analyse.emotion_translator(emotion) for emotion in data.keys()]
                     percentages = list(data.values())
                     st.write(" ")  
                     st.markdown(f'#### Distribucion de Emociones')
@@ -103,11 +102,11 @@ def detector():
                         col1, col2 = st.columns(2)
                 
                         with col1:
-                            emotion, age, gender, race, analysis = analyze_image(temp_file_path)
+                            emotion, age, gender, race, analysis = face_analyse.analyze_image(temp_file_path)
                             
                         with col2:  
-                            spanish_emotion = emotion_translator(emotion)
-                            emoji =  emotion_to_emoji(emotion)
+                            spanish_emotion = face_analyse.emotion_translator(emotion)
+                            emoji =  face_analyse.emotion_to_emoji(emotion)
                             st.markdown(f"## Emocion Detectada: \n # {emoji} {spanish_emotion}")
                             # st.write(f"Predicted Age: {age}")
                             # st.write(f"Predicted Gender: {gender}")
@@ -116,7 +115,7 @@ def detector():
                         temp_dir.cleanup()      
                         # Add the PLOT
                         data = analysis[0]['emotion']
-                        spanish_emotion_names = [emotion_translator(emotion) for emotion in data.keys()]
+                        spanish_emotion_names = [face_analyse.emotion_translator(emotion) for emotion in data.keys()]
                         percentages = list(data.values())
                         st.write(" ")  
                         st.markdown(f'#### Distribucion de Emociones')
@@ -155,17 +154,17 @@ def detector():
                     col1, col2 = st.columns(2)
                 
                     with col1:
-                        emotion, age, gender, race, analysis = analyze_image(temp_file_path)
+                        emotion, age, gender, race, analysis = face_analyse.analyze_image(temp_file_path)
                         
                     with col2:  
-                        spanish_emotion = emotion_translator(emotion)
-                        emoji =  emotion_to_emoji(emotion)
+                        spanish_emotion = face_analyse.emotion_translator(emotion)
+                        emoji =  face_analyse.emotion_to_emoji(emotion)
                         st.markdown(f"## Emocion Detectada: \n # {emoji} {spanish_emotion}")
                         # st.write(f"Predicted Age: {age}")
                         # st.write(f"Predicted Gender: {gender}")  
                     # Add the PLOT
                     data = analysis[0]['emotion']
-                    spanish_emotion_names = [emotion_translator(emotion) for emotion in data.keys()]
+                    spanish_emotion_names = [face_analyse.emotion_translator(emotion) for emotion in data.keys()]
                     percentages = list(data.values())
                     st.write(" ")  
                     st.markdown(f'#### Distribucion de Emociones')

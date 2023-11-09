@@ -1,5 +1,6 @@
 import streamlit as st
-from Page1 import detector
+import face_detector
+import face_analyse
 
 import os
 import tempfile
@@ -7,8 +8,6 @@ import matplotlib.pyplot as plt
 import requests
 from PIL import Image
 from io import BytesIO
-
-from deep_face  import analyze_image
 
 # Create a sidebar with page selection
 page = st.sidebar.radio("Select a page", ["Inteligencia Emocional Artifiacial" , "Detector de Emociones"])
@@ -55,12 +54,10 @@ def main():
     with right_column:
         st.write("")
        
-        
-    
+
 
 # Display the selected page
 if page == "Inteligencia Emocional Artifiacial":
     main()
 elif page == 'Detector de Emociones':
-    detector()
-
+    face_detector.detector()
